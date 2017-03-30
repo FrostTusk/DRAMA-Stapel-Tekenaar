@@ -1,0 +1,24 @@
+!WARNING!
+Normally all the neccessary files are located in D:\From C to EXE 
+After converting the Python Version to C.
+On line 959 of the C Version, change <structmember.h> to "structmember.h" .
+This fixes the issue that vs can't find 'structmember.h'.
+
+After fixing this, VS only gives the following when compiling:
+
+D:\Mathijs\Documents\PycharmProjects\Thuis\DRAMA Stapel Tekenaar\Compilation\From C to EXE>cl UpdatedFramework.c
+Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+UpdatedFramework.c
+UpdatedFramework.c(25415): warning C4293: '<<': shift count negative or too big, undefined behavior
+UpdatedFramework.c(25425): warning C4293: '<<': shift count negative or too big, undefined behavior
+UpdatedFramework.c(25435): warning C4293: '<<': shift count negative or too big, undefined behavior
+Microsoft (R) Incremental Linker Version 14.00.24215.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:UpdatedFramework.exe
+UpdatedFramework.obj
+   Creating library UpdatedFramework.lib and object UpdatedFramework.exp
+
+D:\Mathijs\Documents\PycharmProjects\Thuis\DRAMA Stapel Tekenaar\Compilation\From C to EXE>
