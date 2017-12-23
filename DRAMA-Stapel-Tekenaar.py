@@ -245,7 +245,7 @@ def burn_stapel(stapel, filename):
         # User bevat PAR, VAR en RES
         user = functie[2: len(functie)]
         print("*********************************", file=outfile)
-        print("Tabellen van %i. %s:" % (nummer, titel), file=outfile)
+        print("Stapel van %i. %s:" % (nummer, titel), file=outfile)
         print("", file=outfile)
 
         # VARIABELE EERST (START TOP STAPEL)
