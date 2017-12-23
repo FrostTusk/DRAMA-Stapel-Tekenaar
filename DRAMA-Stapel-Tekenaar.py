@@ -765,7 +765,7 @@ def Interface(titel, pava, tabel, TT_Lijst):
             print()
             print("These Instructions visualize or save the current session")
             print("2: BURN = BURN all the functions you have saved in the current session to a specified", end=" ")
-            print(".txt file ,if there is no file with that name, the program will create one.")
+            print(".txt file, if there is no file with that name, the program will create one.")
             print("2: The program saves this .txt file in the same folder as where the program is located.")
             print("10: GRAPHICS = will GRAPHICally generate the current session with the graphics.py module.")
             print("12: LIJST = Will LIJST all the functions you have saved in the current session in the terminal.")
