@@ -1,11 +1,11 @@
 # DRAMA-Stapel-Tekenaar
-Generates DRAMA stacks given DRAMA function tables.
+Generates DRAMA Stack Frames given DRAMA Assignment Tables.
 
 **Example:**<br/>
 * **Input:**
 
 ```
-Tabellen van 2. Test2:
+Tables of 2. Test2:
 
 Test2:
 PAR | ADRES
@@ -60,14 +60,12 @@ Stapel van 2. Test2:
 
 ### Installing
 ```
-1. Right click DRAMA-Stapel-Tekenaar.py
-2. Click save link as...
-3. Save as .py in your preferred destination
+Just clone this directory.
 ```
 
 ## Running
 
-* **Running ID3-Automator:**
+* **Running DRAMA-Stapel-Tekenaar:**
 
 ```
 1. Navigate to the directory where you saved DRAMA-Stapel-Tekenaar.py
@@ -79,7 +77,7 @@ Stapel van 2. Test2:
 
 ## Contributing
 
-Everyone can contribute.
+Anyone can contribute, however I will not continue updating this project.
 
 
 ## Authors

@@ -1,6 +1,13 @@
 from graphics import GraphicsWindow
 
-# I apologize for the lack of documentation, I was still a foolish novice programmer when I wrote this code.
+# I apologize for the lack of documentation, I was still a foolish, novice programmer when I wrote this code.
+
+# ----------
+# Notation:
+# Entry is an Assignment Table with more information.
+# sf means stack frame, it includes all the data necessary to write a stack frame.
+# sf differs from a set of Assignment Tables in that and sf needs more information: counter/title.
+# ----------
 
 # ----------
 # Data Structures:
@@ -15,7 +22,7 @@ from graphics import GraphicsWindow
 
 # This function downloads the manual to the folder in which the user has saved the program.
 def manual():
-    filename = "DRAMA T-tablelen MANUAL"
+    filename = "DRAMA Stapel Tekenaar ManualL"
     outfile = open('%s.txt' % filename, 'w+')
     print("*********************************", file=outfile)
     print("Welcome to DRAMA Stapel Tekenaar!", file=outfile)
@@ -24,14 +31,18 @@ def manual():
     print("", file=outfile)
     print("1. Introduction:", file=outfile)
     print("What is the DRAMA Stapel Tekenaar? Well, it is what it's name implies, it draws", end=" ", file=outfile)
-    print("stapels for the DRAMA simulator used in SOCS.", file=outfile)
-    print("I made this program so I could hone my skils in python/practice SOCS a bit,", end=" ", file=outfile)
-    print("and I thought that maybe some people would like a program like this.", file=outfile)
-    print("How does it work you ask? Well first off the user enters a few correct Toekeningstablelen.", file=outfile)
-    print("After the user has done this, they simply ask the program to model what the stapel should look like.", file=outfile)
-    print("It offers all the basic features you would expect: modifying T-tablelen, visualizing T-tablelen, etc.", file=outfile)
-    print("The program isn't that complex: ~900 lines of code, but it does offer quite a few nifty features.", file=outfile)
-    print("Seeing as you're reading this manual right now, you're probably in possession of the program,", end=" ", file=outfile)
+    print("Stacks for the DRAMA simulator used in SOCS.", file=outfile)
+    print("I made this program so I could hone my skils in python and practice SOCS,", end=" ", file=outfile)
+    print("I also thought that maybe some people would like a program like this.", file=outfile)
+    print("How does it work you ask? Well first off the user enters a few correct Assignment Tables.", file=outfile)
+    print("After the user has done this, they simply ask the program to model what the Stack should look like.",
+          file=outfile)
+    print("It offers all the basic features you would expect: modifying Tables, visualizing Tables, etc.",
+          file=outfile)
+    print("The program isn't that complex: ~950 lines of code, but it does offer quite a few nifty features.",
+          file=outfile)
+    print("Seeing as you're reading this manual right now, you're probably in possession of the program,", end=" ",
+          file=outfile)
     print("so why not try it out! ;-)", file=outfile)
     print("Anyways, thank you for using my program and I hope it will be of some use to you!", file=outfile)
     print("", file=outfile)
@@ -42,14 +53,14 @@ def manual():
     print("When the user starts the program he/she will be asked to press enter.", file=outfile)
     print("The user can also enter MANUAL to download the MANUAL you are now reading.", file=outfile)
     print("After pressing enter, they will be asked to enter a Function name.", file=outfile)
-    print("This is the name of the first function you want to create a toekeningstable of.", file=outfile)
+    print("This is the name of the first Function you want to create an Assignment Table of.", file=outfile)
     print("     The Input should be a string (bvb.: HelloWorld)", file=outfile)
     print("After entering a name, the user will be prompted to enter PAR or VAR or RES.", file=outfile)
-    print("These commands stand for PARameter, VARiable or RESultaat", end=" ", file=outfile)
-    print("the user should enter what kind of toekeningstable he/she wants to make.", file=outfile)
+    print("These commands stand for PARameter, VARiable or RESult", end=" ", file=outfile)
+    print("the user should enter what kind of Assignment Table he/she wants to make.", file=outfile)
     print("     The Input should be PAR or VAR or RES (bvb. : PAR)", file=outfile)
-    print("After entering both the title of the function and what kind of table the user wants,", end=" ", file=outfile)
-    print("the user will need to enter the amount of elements used in the table", file=outfile)
+    print("After entering both the title of the Function and what kind of Table the user wants,", end=" ", file=outfile)
+    print("the user will need to enter the amount of elements used in the Table", file=outfile)
     print("     The Input should be an integer number (bvb.: 3)", file=outfile)
     print("After entering all of this information, the user will enter the ui.", file=outfile)
     print("Here they can type HELP or DETAILS for more help on what they can do next", file=outfile)
@@ -57,12 +68,9 @@ def manual():
     print("3. Extra Information:", file=outfile)
     print("If you are still running into trouble , want to report a bug, or want to help", end=" ", file=outfile)
     print("me improve the DRAMA Stapel Tekenaar, ", end=" ", file=outfile)
-    print("do not hesitate to contact me at mathijs.hubrechtsen@student.kuleuven.be!", file=outfile)
+    print("do not hesitate to contact me on github!", file=outfile)
     print("Finally I would like to thank you again for using my program,", end=" ", file=outfile)
-    print("I'm only still learning so please do give me constructive criticism if it could help me!", file=outfile)
     print("     -Mathijs Hubrechtsen", file=outfile)
-    print("", file=outfile)
-    print("4. Credits:", file=outfile)
     print("", file=outfile)
     print("*********************************", file=outfile)
     outfile.close()
@@ -76,6 +84,22 @@ def gen_std():
                ['Test2', 'VAR', [["VARA1", '-4(R8)'], ["VARA2", '-2(R8)']]],
                ['Test2', 'RES', [["RES1", '4(R8)']]]]]
     return sf_list
+
+
+def create_entry(title, data, table):
+    entry = list()
+    entry.append(title)
+    entry.append(data)
+    entry.append(table)
+    return entry
+
+
+def create_sf(counter, title, table, data):
+    sf = list()
+    sf.append(counter)
+    sf.append(title)
+    sf.append(create_entry(title, data, table))
+    return sf
 
 # ----------
 
@@ -112,7 +136,7 @@ def print_all(sf_list):
 
 def save_to_file(filename, sf_list):
     outfile = open('%s.txt' % filename, 'w+')
-    print("Current T-Tables written to %s.txt!" % filename)
+    print("Current Assignment Tables written to %s.txt!" % filename)
 
     for sf in sf_list:
         counter = sf[0]
@@ -191,7 +215,7 @@ def sf_list_graphics(sf_list):
 # The next functions handle drawing ascii stacks.
 
 
-# Dissect an address to see if it's a valid non-numeric, non-register DRAMA address
+# Dissect an address to see if it's a valid non-numeric, non-register DRAMA address.
 def dissect(address):
     address = str(address)
     try:
@@ -210,8 +234,8 @@ def dissect(address):
     return False
 
 
-# stack_entry = final version of an entry, stack_entry will be used to draw the stack
-# table = the non-final table corresponding to the entry
+# stack_entry = final version of an Entry, stack_entry will be used to draw a section of the Stack Frame
+# table = the non-final Assignment Table corresponding to the Entry
 def update_entry(stack_entry, table):
     for i in range(len(table)):
         # Dissect the address
@@ -259,10 +283,9 @@ def burn_stack(stack, filename):
     for sf in stack:
         counter = sf[0]
         title = sf[1]
-        # User bevat PAR, VAR en RES
         entry_list = sf[2: len(sf)]
         print("*********************************", file=outfile)
-        print("Stack of %i. %s:" % (counter, title), file=outfile)
+        print("Stack Frame of %i. %s:" % (counter, title), file=outfile)
         print("", file=outfile)
 
         # VARIABLES FIRST (START AT TOP OF STACK)
@@ -362,9 +385,9 @@ def burn_stack(stack, filename):
     return
 
 
-# Adds layout formatting to the stack that was written to the given file
+# Adds layout formatting to the stack frame that was written to the given file
 def fix_stack_layout(filename):
-    # length contains the length of the longest cell name
+    # length contains the length of the longest memory cell name
     length = 0
     outfile = open('%s.txt' % filename, 'r')
     for line in outfile:
@@ -459,41 +482,41 @@ def clean_temp():
 def make_new(amt):
     table = []
     for i in range(amt):
-        rij = ["..."] * 2
-        table.append(rij)
+        row = ["..."] * 2
+        table.append(row)
     return table
 
 
-def add_table(table, pava):
-    print("RIJ is niet de plaats van rij!")
-    print("Als je de eerste rij wilt hebben moet je niet 0 invullen maar 1!")
-    user = int(input("ADD how many new %s? " % pava))
+def add_table(table, data):
+    print("ROW is not the programmer's interpretation of row!")
+    print("ROW starts with 1!")
+    user = int(input("ADD how many new %s? " % data))
     print()
     for i in range(user):
         table.append(["...", "..."])
-    print("*Nieuwe table*")
+    print("*This is the new Assignment Table*")
 
 
 def delete_table(table):
-    print("RIJ is niet de plaats van rij!")
-    print("Als je de eerste rij wilt hebben moet je niet 0 invullen maar 1!")
-    rij = int(input("RIJ: "))
+    print("ROW is not the programmer's interpretation of row!")
+    print("ROW starts with 1!")
+    row = int(input("ROW: "))
     print()
-    table.pop(rij - 1)
-    print("*Nieuwe table*")
+    table.pop(row - 1)
+    print("*This is the new Assignment Table*")
 
 
-def enter_table(titel, table, pava):
-    print("Element betekent de data dat je op die plaats wil invoeren.")
-    print("Vul EXIT in om vroegtijdig weg te gaan uit ENTER modus.")
+def enter_table(title, table, data):
+    print("Value means the data that you would like to enter in the current Table cell.")
+    print("Type EXIT to EXIT ENTER mode.")
     for i in range(len(table)):
         for j in range(2):
-            print_current(titel, table, pava)
+            print_current(title, table, data)
             print()
             if j == 0:
-                user = input("Enter Element: ")
+                user = input("Enter Value: ")
             elif j == 1:
-                user = validInput("ENTER", table, i, j)
+                user = valid_input("ENTER", table, i, j)
 
             if user != "EXIT":
                 table[i][j] = user
@@ -501,83 +524,83 @@ def enter_table(titel, table, pava):
                 break
         if user == "EXIT":
             break
-    print("*Nieuwe table*")
+    print("*This is the new Assignment Table*")
 
 
 def modify_table(table):
-    print("RIJ en KOLOM zijn niet de plaats van de rij en kolom!")
-    print("Als je de eerste rij wilt hebben moet je niet 0 invullen maar 1!")
-    rij = int(input("RIJ: "))
-    kolom = int(input("KOLOM: "))
-    if kolom - 1 == 1:
-        user = validInput("MODIFY", table, rij, kolom)
-        table[rij - 1][kolom - 1] = user
+    print("ROW and COLUMN are not the programmer's interpretation of row and column!")
+    print("ROW and COLUMN start at 1!")
+    row = int(input("ROW: "))
+    column = int(input("COLUMN: "))
+    if column - 1 == 1:
+        user = valid_input("MODIFY", table, row, column)
+        table[row - 1][column - 1] = user
     else:
         user = input("NEW VALUE: ")
-        table[rij - 1][kolom - 1] = user
+        table[row - 1][column - 1] = user
     return
 
 # ----------
 
 
-# These Functions check if the input is valid or sort the Toekeningstabelen of the current session>
+# These functions check if the input is valid or sort the stack frames of the current session.
 
-# The Difference between checkInput and validInput is that ValidInput only works if called upon to modify
-# a specific element in a Function.
-def checkInput(tocheck, value):
-    if tocheck == "PAVA":
-        pava = input("Enter PAR or VAR or RES: ")
-        pava = pava.upper()
-        while pava != "PAR" and pava != "VAR" and pava != "RES":
-            pava = input("Enter PAR or VAR or RES: ")
-            pava = pava.upper()
-        return pava
+# The Difference between check_input and valid_input is that Valid_input only works if called upon to modify
+# a specific element in a stack frame entry.
+def check_input(mode, value):
+    if mode == "DATA":
+        data = input("Enter PAR or VAR or RES: ")
+        data = data.upper()
+        while data != "PAR" and data != "VAR" and data != "RES":
+            data = input("Enter PAR or VAR or RES: ")
+            data = data.upper()
+        return data
 
-    elif tocheck == "AMOUNT":
-        pava = value
-        amt = input("Amount of %s: " % pava)
-        Test = False
-        while Test is False:
-            Test = True
+    elif mode == "AMOUNT":
+        data = value
+        amt = input("Amount of %s: " % data)
+        test = False
+        while test is False:
+            test = True
             try:
                 int(amt)
             except ValueError:
-                print("That's not an int! If you want to enter for example, 3 %s," % pava, end=" ")
+                print("That's not an int! If you want to enter for example, 3 %s," % data, end=" ")
                 print("you would enter the number: 3.")
-                Test = False
+                test = False
 
-            if Test is False:
-                amt = input("Amount of %s: " % pava)
+            if test is False:
+                amt = input("Amount of %s: " % data)
             else:
                 amt = int(amt)
         return amt
 
 
-def validInput(tocheck, table, rij, kolom):
+def valid_input(mode, table, row, column):
     valid = bool
-    if tocheck == "MODIFY" or tocheck == "ENTER":
-        if tocheck == "MODIFY":
+    if mode == "MODIFY" or mode == "ENTER":
+        if mode == "MODIFY":
             user = input("NEW VALUE: ")
             valid = False
-        elif tocheck == "ENTER":
-            user = input("Enter Element: ")
+        elif mode == "ENTER":
+            user = input("Enter value: ")
             user = user.upper()
             if user == "EXIT":
                 valid = True
             else:
                 valid = False
 
-        checkset = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+        check_set = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
         while valid is not True:
             valid = True
 
-            usertest = list(user)
-            if "(" not in usertest:
+            user_test = list(user)
+            if "(" not in user_test:
                 valid = False
 
             if valid:
-                usertest = user.split("(")
-                test = usertest[0]
+                user_test = user.split("(")
+                test = user_test[0]
                 try:
                     test = int(test)
                 except ValueError:
@@ -588,10 +611,10 @@ def validInput(tocheck, table, rij, kolom):
                     if -9999 > test or test > 9999:
                         valid = False
 
-                test = usertest[1]
+                test = user_test[1]
                 if test[0] != "R":
                     valid = False
-                elif test[1] not in checkset:
+                elif test[1] not in check_set:
                     valid = False
                 elif test[2] != ")":
                     valid = False
@@ -599,59 +622,43 @@ def validInput(tocheck, table, rij, kolom):
             try:
                 val = int(user)
             except ValueError:
-                val = user
+                pass
             else:
                 if 0 <= val < 9999:
                     valid = True
 
             if valid is not True:
-                usertest = list(user)
-                if len(usertest) == 2:
-                    if usertest[0] != "R":
+                user_test = list(user)
+                if len(user_test) == 2:
+                    if user_test[0] != "R":
                         valid = False
-                    elif usertest[1] not in checkset:
+                    elif user_test[1] not in check_set:
                         valid = False
                     else:
                         valid = True
                 else:
                     valid = False
 
-            if valid is not True and tocheck == "MODIFY":
-                print("The input should be a valid DRAMA addresss!")
-                user = validInput("MODIFY", table, rij, kolom)
-            elif valid is not True and tocheck == "ENTER":
-                print("The input should be a valid DRAMA addresss!")
-                user = validInput("ENTER", table, rij, kolom)
+            if valid is not True and mode == "MODIFY":
+                print("The input should be a valid DRAMA address!")
+                user = valid_input("MODIFY", table, row, column)
+            elif valid is not True and mode == "ENTER":
+                print("The input should be a valid DRAMA address!")
+                user = valid_input("ENTER", table, row, column)
     return user
-
-
-def create_entry(titel, pava, table):
-    entry = []
-    entry.append(titel)
-    entry.append(pava)
-    entry.append(table)
-    return entry
-
-
-def create_sf(nummer, titel, table, pava):
-    sf = []
-    sf.append(nummer)
-    sf.append(titel)
-    sf.append(create_entry(titel, pava, table))
-    return sf
 
 
 def check_sf(sf):
     temp = sf[2: len(sf)]
     # Get the entry that was just inserted
     new_entry = temp[-1]
-    new_entry_pava = new_entry[1]
+    new_entry_data = new_entry[1]
     # Check if this entry already exists
     for entry_count in range(len(temp) - 1):
         entry = temp[entry_count]
-        entry_pava = entry[1]
-        if entry_pava == new_entry_pava:
-            # +2 because counter and title are in the front.
+        entry_data = entry[1]
+        if entry_data == new_entry_data:
+            # +2 because counter and title are still in front.
             sf.pop(entry_count + 2)
             return
     return
@@ -659,21 +666,24 @@ def check_sf(sf):
 
 def check_after_delete(sf_list, sf):
     if len(sf) == 2:
-        # Delete sf
         sf_list.remove(sf)
 
-        nummer_expect = 1
+        number_expect = 1
         for sf in sf_list:
-            if sf[0] != nummer_expect:
-                sf[0] = nummer_expect
-            nummer_expect += 1
+            if sf[0] != number_expect:
+                sf[0] = number_expect
+            number_expect += 1
     return
 
+# ----------
 
-def get_value(pava):
-    if pava == "PAR":
+# These functions handle sorting.
+
+
+def get_value(data):
+    if data == "PAR":
         return 0
-    elif pava == "VAR":
+    elif data == "VAR":
         return 1
     else:
         return 2
@@ -696,29 +706,31 @@ def sort_sf(sf):
     return
 
 
-def sort_lijst_invoeg(sf_list, titel, pava, table):
-    sf_nummer = 0
-    check = True
+def sorted_insert(sf_list, title, data, table):
+    sf_counter = 0
+    flag = True
 
     for sf in sf_list:
-        sf_nummer = sf[0]
-        sf_titel = sf[1]
-        if sf_titel == titel:
-            check = False
-            sf.append(create_entry(titel, pava, table))
+        if sf[0] > sf_counter:
+            sf_counter = sf[0]
+        sf_title = sf[1]
+        if sf_title == title:
+            flag = False
+            sf.append(create_entry(title, data, table))
             check_sf(sf)
             sort_sf(sf)
             break
-    if check:
-        new_sf = create_sf(sf_nummer + 1, titel, table, pava)
+
+    if flag:
+        new_sf = create_sf(sf_counter + 1, title, table, data)
         sf_list.append(new_sf)
     return
 
 # ----------
 
 
-# This Function handles the interface.
-def interface(titel, pava, table, sf_list):
+# This function handles the interface.
+def interface(title, data, table, sf_list):
     user = "START"
     while user != "EXIT":
         print()
@@ -734,18 +746,18 @@ def interface(titel, pava, table, sf_list):
             print("2: BURN")
             print("3: DELETE")
             print("4: DETAILS")
-            print("5: DRUK")
+            print("5: PRINT")
             print("6: ENTER")
             print("7: EXIT")
             print("8: GET")
             print("9: GRAPHICS or G")
             print("10: HELP")
-            print("11: LIJST")
+            print("11: LIST or LS")
             print("12: MODIFY")
             print("13: NEW")
             print("14: REMOVE")
             print("15: SAVE or S")
-            print("16: STAPEL or ST")
+            print("16: STACK or ST")
             print("17: STANDARD or STD")
             print("TYPE DETAILS FOR DETAILS ON ALL COMMANDS")
             input("Press Enter to exit HELP!")
@@ -753,112 +765,113 @@ def interface(titel, pava, table, sf_list):
 
         elif user == "DETAILS":
             print("* DETAILS: *")
-            print("FUNCTION = the function of which you are currently making a toekeningstable")
-            print("SESSION = all of the functions made during a single 'session'")
+            print("FUNCTION = the Function of which you are making an Allocation Table")
+            print("SESSION = all of the Functions made during a single 'session'")
             print()
-            print("These Instructions modify the current function:")
-            print("1: ADD = ADD a specied amount of extra rows to the current function.")
+            print("These Instructions modify the current Allocation Table:")
+            print("1: ADD = ADD a specified amount of extra rows to the current Allocation Table.")
             print("3: DELETE = DELETE a specified row.")
-            print("6: ENTER = ENTER the function, this will always enter the function at the very first element.")
-            print("12: MODIFY =  MODIFY a specified element in the function.")
+            print("6: ENTER = ENTER the Allocation Table, "
+                  "this will always enter the Allocation Table at the very first element.")
+            print("12: MODIFY =  MODIFY a specified element in the Allocation Table.")
             input("Press Enter to continue")
             print()
-            print("These Instructions generate a new or old function:")
-            print("8: GET = GET an old function.")
-            print("13: NEW = Create a NEW function.")
-            print("14: REMOVE = REMOVE an old function")
+            print("These Instructions generate a new or old Function/Allocation Table:")
+            print("8: GET = GET an old Function/Allocation Table.")
+            print("13: NEW = Create a NEW Function/Allocation Table.")
+            print("14: REMOVE = REMOVE an old Function.")
             input("Press Enter to continue")
             print()
-            print("These Instructions visualize or save the current function:")
-            print("5: DRUK = DRUK the current function.")
-            print("15: SAVE =  SAVE the current function")
+            print("These Instructions visualize or save the current Allocation Table::")
+            print("5: PRINT = PRINT the current Allocation Table.")
+            print("15: SAVE =  SAVE the current Allocation Table.")
             input("Press Enter to continue")
             print()
-            print("These Instructions generate a standard or old session:")
+            print("These Instructions generate sessions:")
             print("17: STANDARD or STD = load the STANDARD preset session ")
             input("Press Enter to continue")
             print()
             print("These Instructions visualize or save the current session")
-            print("2: BURN = BURN all the functions you have saved in the current session to a specified", end=" ")
+            print("2: BURN = BURN all the Functions you have saved in the current session to a specified", end=" ")
             print(".txt file, if there is no file with that name, the program will create one.")
             print("2: The program saves this .txt file in the same folder as where the program is located.")
             print("9: GRAPHICS = will GRAPHICally generate the current session with the graphics.py module.")
-            print("11: LIJST = Will LIJST all the functions you have saved in the current session in the terminal.")
+            print("11: LIST = Will LIST all the Functions you have saved in the current session in the terminal.")
             input("Press Enter to continue")
             print()
             print("These Instructions will perform global actions.")
             print("4: DETAILS = I think you know what this does ;-)")
             print("5: EXIT = EXIT the program.")
             print("10: HELP = will display a list of all the currently implemented commands to HELP you")
-            print("14: STAPEL =  will generate the STAPEL in a specified .txt file. (see BURN)")
+            print("14: STACK =  will generate the STACK in a specified .txt file. (similar to BURN)")
             input("Press Enter to exit DETAILS!")
             print()
 
         elif user == "ADD":
-            print("*Dit is de oude table*")
-            print_current(titel, table, pava)
-            add_table(table, pava)
-            print_current(titel, table, pava)
+            print("*This is the old Assignment Table*")
+            print_current(title, table, data)
+            add_table(table, data)
+            print_current(title, table, data)
 
         elif user == "DELETE":
-            print("*Dit is de oude table*")
-            print_current(titel, table, pava)
+            print("*This is the old Assignment Table*")
+            print_current(title, table, data)
             delete_table(table)
-            print_current(titel, table, pava)
+            print_current(title, table, data)
 
-        elif user == "DRUK":
-            print("Dit is de Current geselecteerde table:")
-            print_current(titel, table, pava)
+        elif user == "PRINT":
+            print("This is the currently selected Assignment Table:")
+            print_current(title, table, data)
 
         elif user == "ENTER":
-            print("Enter de elementen van de table, startend met linksboven:")
-            enter_table(titel, table, pava)
-            print_current(titel, table, pava)
+            print("Enter the values of the Assignment Table, starting top left:")
+            enter_table(title, table, data)
+            print_current(title, table, data)
 
         elif user == "GET":
-            print("Roep een oude gesavede functie op:")
-            titel = input("Enter Functie Naam: ")
-            pava = checkInput("PAVA", "NULL")
+            print("Get a previously saved Function/Assignment Table")
+            title = input("Enter Function name: ")
+            data = check_input("DATA", "NULL")
 
             found = False
             for sf in sf_list:
-                if sf[1] == titel:
+                if sf[1] == title:
                     temp = sf[2: len(sf)]
                     for entry in temp:
-                        if entry[1] == pava:
+                        if entry[1] == data:
                             found = True
                             table = entry[2]
-                            print("Current table is nu:")
-                            print_current(titel, table, pava)
+                            print("Current Assignment Table is now:")
+                            print_current(title, table, data)
                             break
                     break
 
             if found is False:
-                print("That T-table doesn't exist!")
-                print("Creating new T-table with name %s-%s." % (pava, titel))
-                amt = checkInput("AMOUNT", pava)
+                print("That Assignment Table doesn't exist!")
+                print("Creating a new Assignment Table with name %s-%s." % (data, title))
+                amt = check_input("AMOUNT", data)
                 table = make_new(amt)
 
         elif user == "MODIFY":
-            print("*Old T-table*")
-            print_current(titel, table, pava)
+            print("*This is the old Assignment Table*")
+            print_current(title, table, data)
             modify_table(table)
-            print("*New T-table*")
-            print_current(titel, table, pava)
+            print("*This is the new Assignment Table*")
+            print_current(title, table, data)
 
         elif user == "NEW":
-            print("Make a new Function: ")
+            print("Make a new Function/Assignment Table: ")
             print()
-            titel = input("Enter Function name: ")
-            pava = checkInput("PAVA", "NULL")
-            amt = checkInput("AMOUNT", pava)
+            title = input("Enter Function name: ")
+            data = check_input("DATA", "NULL")
+            amt = check_input("AMOUNT", data)
             table = make_new(amt)
 
         elif user == "SAVE" or user == "S":
-            sort_lijst_invoeg(sf_list, titel, pava, table)
+            sorted_insert(sf_list, title, data, table)
 
-        elif user == "LIJST":
-            print("*These are all the current T-tablelen*")
+        elif user == "LIST" or user == "LS":
+            print("*These are all the current Functions*")
             print()
             print_all(sf_list)
 
@@ -870,29 +883,29 @@ def interface(titel, pava, table, sf_list):
             save_to_file(filename, sf_list)
 
         elif user == "REMOVE":
-            print("Delete an old function: ")
-            titel = input("Enter Function name: ")
-            pava = checkInput("PAVA", "NULL")
+            print("Remove an entire stack frame: ")
+            title = input("Enter Function name: ")
+            data = check_input("DATA", "NULL")
 
             found = False
             for sf in sf_list:
-                if sf[1] == titel:
+                if sf[1] == title:
                     temp = sf[2: len(sf)]
                     for entry_count in range(len(temp)):
                         entry = temp[entry_count]
-                        if entry[1] == pava:
+                        if entry[1] == data:
                             found = True
                             sf.pop(entry_count + 2)
                             check_after_delete(sf_list, sf)
-                            print("T-table with name %s-%s removed." % (pava, titel))
+                            print("Assignment Table with name %s-%s removed." % (data, title))
                             break
                     break
             if found is False:
-                print("That T-table doesn't exist!")
+                print("Assignment Table doesn't exist!")
 
-        elif user == "STAPEL" or user == "ST":
+        elif user == "STACK" or user == "ST":
             filename = input("Enter filename: ")
-            print("Current Stapel written to %s.txt!" % filename)
+            print("Current Stack written to %s.txt!" % filename)
             stapel = make_stack(sf_list)
             burn_stack(stapel, filename)
             fix_stack_layout(filename)
@@ -916,7 +929,7 @@ def main():
     user = input("Press enter to start or type MANUAL to download the manual! ")
     user = user.upper()
     while user == "MANUAL":
-        print("The MANUAL has been written to the file <DRAMA T-tablelen MANUAL.txt>")
+        print("The MANUAL has been written to the file <DRAMA Stapel Tekenaar Manual.txt>")
         manual()
         print()
         user = input("Press enter to start or type MANUAL to download the manual! ")
@@ -934,8 +947,8 @@ def main():
     else:
         print()
         title = input("Enter Function name: ")
-        data = checkInput("PAVA", "NULL")
-        amt = checkInput("AMOUNT", type)
+        data = check_input("DATA", "NULL")
+        amt = check_input("AMOUNT", type)
         table = make_new(amt)
         interface(title, data, table, sf_list)
 
