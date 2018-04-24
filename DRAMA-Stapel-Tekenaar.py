@@ -1,13 +1,21 @@
 from graphics import GraphicsWindow
+
+# I apologize for the lack of documentation, I was still a foolish novice programmer when I wrote this code.
+
 # ----------
-# function = a function in python
-# Function = the toekeningstabel of the current function in DRAMA.
+# Data Structures:
+# sf_list = [ sf = [counter, title, entry = [ title, data = ("PAR"|"VAR"|"RES"), table = [...] ], more entries...],
+#                   more sf...]
+# stack = stack = [ sf = [counter, title, par_entry = [flag, memory_cell = [offset, name], more memory_cell...],
+#                         var_entry, res_entry], more sf... ]
 # ----------
+
+# The next functions generate things.
 
 
 # This function downloads the manual to the folder in which the user has saved the program.
 def manual():
-    filename = "DRAMA T-Tabellen MANUAL"
+    filename = "DRAMA T-tablelen MANUAL"
     outfile = open('%s.txt' % filename, 'w+')
     print("*********************************", file=outfile)
     print("Welcome to DRAMA Stapel Tekenaar!", file=outfile)
@@ -16,32 +24,32 @@ def manual():
     print("", file=outfile)
     print("1. Introduction:", file=outfile)
     print("What is the DRAMA Stapel Tekenaar? Well, it is what it's name implies, it draws", end=" ", file=outfile)
-    print("stapels for the DRAMA simulator used in socs.", file=outfile)
-    print("I made this program so I could hone my skils in python/practice socs a bit,", end=" ", file=outfile)
+    print("stapels for the DRAMA simulator used in SOCS.", file=outfile)
+    print("I made this program so I could hone my skils in python/practice SOCS a bit,", end=" ", file=outfile)
     print("and I thought that maybe some people would like a program like this.", file=outfile)
-    print("How does it work you ask? Well first off the user enters a few correct Toekeningstabellen.", file=outfile)
+    print("How does it work you ask? Well first off the user enters a few correct Toekeningstablelen.", file=outfile)
     print("After the user has done this, they simply ask the program to model what the stapel should look like.", file=outfile)
-    print("It offers all the basic features you would expect: modifying T-Tabellen, visualizing T-Tabellen, etc.", file=outfile)
-    print("The program isn't that complex ~900 lines of code, but it does offer quite a few nifty features.", file=outfile)
+    print("It offers all the basic features you would expect: modifying T-tablelen, visualizing T-tablelen, etc.", file=outfile)
+    print("The program isn't that complex: ~900 lines of code, but it does offer quite a few nifty features.", file=outfile)
     print("Seeing as you're reading this manual right now, you're probably in possession of the program,", end=" ", file=outfile)
     print("so why not try it out! ;-)", file=outfile)
     print("Anyways, thank you for using my program and I hope it will be of some use to you!", file=outfile)
     print("", file=outfile)
     print("2. MANUAL:", file=outfile)
-    print("Currently the DRAMA Stapel Tekenaar does not have a GUI, instead it uses", end=" ", file=outfile)
+    print("The DRAMA Stapel Tekenaar does not have a GUI, instead it uses", end=" ", file=outfile)
     print("a Terminal-esque UI where the user enters commands in", end=" ", file=outfile)
     print("the terminal/input box of Pycharm.", file=outfile)
     print("When the user starts the program he/she will be asked to press enter.", file=outfile)
     print("The user can also enter MANUAL to download the MANUAL you are now reading.", file=outfile)
     print("After pressing enter, they will be asked to enter a Function name.", file=outfile)
-    print("This is the name of the first function you want to create a toekeningstabel of.", file=outfile)
+    print("This is the name of the first function you want to create a toekeningstable of.", file=outfile)
     print("     The Input should be a string (bvb.: HelloWorld)", file=outfile)
     print("After entering a name, the user will be prompted to enter PAR or VAR or RES.", file=outfile)
     print("These commands stand for PARameter, VARiable or RESultaat", end=" ", file=outfile)
-    print("the user should enter what kind of toekeningstabel he/she wants to make.", file=outfile)
+    print("the user should enter what kind of toekeningstable he/she wants to make.", file=outfile)
     print("     The Input should be PAR or VAR or RES (bvb. : PAR)", file=outfile)
-    print("After entering both the title of the function and what kind of tabel the user wants,", end=" ", file=outfile)
-    print("the user will need to enter the amount of elements used in the tabel", file=outfile)
+    print("After entering both the title of the function and what kind of table the user wants,", end=" ", file=outfile)
+    print("the user will need to enter the amount of elements used in the table", file=outfile)
     print("     The Input should be an integer number (bvb.: 3)", file=outfile)
     print("After entering all of this information, the user will enter the ui.", file=outfile)
     print("Here they can type HELP or DETAILS for more help on what they can do next", file=outfile)
@@ -60,283 +68,292 @@ def manual():
     outfile.close()
 
 
-# These Functions save or visualize either the Current function or all of the functions in the current session.
-def standaard():
-    TT_Lijst = [ [1, 'Test1', ['Test1', 'PAR', [ ["PARA3", '1(R8)'], ["PARA2", '2(R8)'], ["PARA1", '3(R8)'], ] ],
-                 ['Test1', 'VAR', [ ["VARA1", '-4(R8)'], ["VARA2", '-3(R8)'], ["VARA3", '-2(R8)'] ] ],
-                 ['Test1', 'RES', [ ["RES1", '4(R8)'] ] ] ],
-                 [2, 'Test2', ['Test2', 'PAR', [ ["PARA3", '1(R8)'], ["PARA2", '2(R8)'], ["PARA1", '3(R8)'], ] ],
-                 ['Test2', 'VAR', [ ["VARA1", '-4(R8)'], ["VARA2", '-2(R8)'] ] ],
-                 ['Test2', 'RES', [ ["RES1", '4(R8)'] ] ] ] ]
-    return TT_Lijst
+def gen_std():
+    sf_list = [[1, 'Test1', ['Test1', 'PAR', [["PARA3", '1(R8)'], ["PARA2", '2(R8)'], ["PARA1", '3(R8)'], ]],
+               ['Test1', 'VAR', [["VARA1", '-4(R8)'], ["VARA2", '-3(R8)'], ["VARA3", '-2(R8)']]],
+               ['Test1', 'RES', [["RES1", '4(R8)']]]],
+               [2, 'Test2', ['Test2', 'PAR', [["PARA3", '1(R8)'], ["PARA2", '2(R8)'], ["PARA1", '3(R8)'], ]],
+               ['Test2', 'VAR', [["VARA1", '-4(R8)'], ["VARA2", '-2(R8)']]],
+               ['Test2', 'RES', [["RES1", '4(R8)']]]]]
+    return sf_list
+
+# ----------
+
+# These functions save or visualize either the currently selected stack frame
+# or all the stack frames of the current session.
 
 
-def drukCurrent(titel, tabel, pava):
+def print_current(title, table, data):
     print()
-    print("%s:" % titel)
-    print(pava, "|", end=" ")
-    print("ADRES")
-    for i in range(len(tabel)):
+    print("%s:" % title)
+    print(data, "|", end=" ")
+    print("address")
+    for i in range(len(table)):
         for j in range(2):
             if j == 0:
-                print(tabel[i][j], "|", end=" ")
+                print(table[i][j], "|", end=" ")
             if j == 1:
-                print(tabel[i][j])
+                print(table[i][j])
     print()
     return
 
 
-def drukAll(TT_Lijst):
-    for sub in TT_Lijst:
-        nummer = sub[0]
-        titel = sub[1]
-        node_lijst = sub[2: len(sub)]
+def print_all(sf_list):
+    for sf in sf_list:
+        counter = sf[0]
+        title = sf[1]
         print("*********************************")
-        print("Tabellen van %i. %s:" % (nummer, titel))
-        for node in node_lijst:
-            drukCurrent(titel, node[2], node[1])
+        print("Tables of %i. %s:" % (counter, title))
+        entry_list = sf[2: len(sf)]
+        for entry in entry_list:
+            print_current(title, entry[2], entry[1])
     return
 
 
-def saveFile(filename, TT_Lijst):
+def save_to_file(filename, sf_list):
     outfile = open('%s.txt' % filename, 'w+')
-    print("Current T-Tabellen written to %s.txt!" % filename)
+    print("Current T-Tables written to %s.txt!" % filename)
 
-    for sub in TT_Lijst:
-        nummer = sub[0]
-        titel = sub[1]
-        node_lijst = sub[2: len(sub)]
+    for sf in sf_list:
+        counter = sf[0]
+        title = sf[1]
         print("*********************************", file=outfile)
-        print("Tabellen van %i. %s:" % (nummer, titel), file=outfile)
+        print("Tables of %i. %s:" % (counter, title), file=outfile)
         print("", file=outfile)
-        for node in node_lijst:
-            pava = node[1]
-            tabel = node[2]
-            value = len(tabel)
-            print("     ", "%s%s%s" % ("*", pava, "*"), "|", end=" ", file=outfile)
-            print("*ADRES*", file=outfile)
-            for i in range(value):
+        entry_list = sf[2: len(sf)]
+        for entry in entry_list:
+            data = entry[1]
+            table = entry[2]
+            print("     ", "%s%s%s" % ("*", data, "*"), "|", end=" ", file=outfile)
+            print("*address*", file=outfile)
+            for i in range(len(table)):
                 for j in range(2):
                     if j == 0:
-                        print("     ", tabel[i][j], "|", end=" ", file=outfile)
+                        print("     ", table[i][j], "|", end=" ", file=outfile)
                     if j == 1:
-                        print(tabel[i][j], file=outfile)
+                        print(table[i][j], file=outfile)
             print("", file=outfile)
     outfile.close()
     return
 
 
-def TT_Lijst_graphics(TT_Lijst):
-    widthmax = 7
+def sf_list_graphics(sf_list):
+    width_max = 7
     length = 50
-    for sub in TT_Lijst:
-        user = sub[2: len(sub)]
-        for node in user:
-            tabel = node[2]
-            length += len(tabel) * 25 + 25
+    for sf in sf_list:
+        entry_list = sf[2: len(sf)]
+        for entry in entry_list:
+            table = entry[2]
+            length += len(table) * 25 + 25
             length += 50
-            for i in range(len(tabel)):
+            for i in range(len(table)):
                 for j in range(2):
-                    string = str(tabel[i][j])
-                    if len(string) > widthmax:
-                        widthmax = len(string)
+                    string = str(table[i][j])
+                    if len(string) > width_max:
+                        width_max = len(string)
 
-    width = 2 * (25 + widthmax * 10 + 25)
+    width = 2 * (25 + width_max * 10 + 25)
     posy = 50
     win = GraphicsWindow(50 + width + 50, length + 100)
     canvas = win.canvas()
 
-    for sub in TT_Lijst:
-        user = sub[2: len(sub)]
-        for node in user:
+    for sf in sf_list:
+        user = sf[2: len(sf)]
+        for entry in user:
             canvas.setTextAnchor("nw")
-            canvas.drawText(50, posy - 20, " %s-%s:" % (node[0], node[1]))
-            tabel = node[2]
+            canvas.drawText(50, posy - 20, " %s-%s:" % (entry[0], entry[1]))
+            table = entry[2]
 
-            height = len(tabel) * 25 + 25
+            height = len(table) * 25 + 25
             canvas.drawRect(50, posy, width, height)
             canvas.drawLine(50 + width / 2, posy, 50 + width / 2, posy + height)
 
             canvas.setTextAnchor("center")
             for j in range(2):
                 if j == 0:
-                    canvas.drawText(50 + width / 4 + j * (width / 2), posy + 12.5, "*" + node[1] + "*")
+                    canvas.drawText(50 + width / 4 + j * (width / 2), posy + 12.5, "*" + entry[1] + "*")
                 else:
-                    canvas.drawText(50 + width / 4 + j * (width / 2), posy + 12.5, "*ADRES*")
+                    canvas.drawText(50 + width / 4 + j * (width / 2), posy + 12.5, "*address*")
             posy += 25
             canvas.drawLine(50, posy, 50 + width, posy)
 
-            for i in range(len(tabel)):
+            for i in range(len(table)):
                 for j in range(2):
-                    canvas.drawText(50 + width / 4 + j * (width / 2), posy + 12.5, tabel[i][j])
+                    canvas.drawText(50 + width / 4 + j * (width / 2), posy + 12.5, table[i][j])
                 posy += 25
                 canvas.drawLine(50, posy, 50 + width, posy)
             posy += 50
     win.wait()
     return
+
 # ----------
 
+# The next functions handle drawing ascii stacks.
 
-# These Functions handle the stapel.
-def ontleed(adres):
-    adres = str(adres)
+
+# Dissect an address to see if it's a valid non-numeric, non-register DRAMA address
+def dissect(address):
+    address = str(address)
     try:
-        int(adres)
+        int(address)
     except ValueError:
-        if adres == "...":
+        if address == "...":
             return False
-        if adres[0] == "R":
+        if address[0] == "R":
             return False
-        token = adres.split("(")
-        indexregister = token[1]
-        if indexregister[1] != "8":
+        token = address.split("(")
+        index_register = token[1]
+        if index_register[1] != "8":
             return False
         return token[0]
 
     return False
 
 
-def update_part(part, tabel):
-    for i in range(len(tabel)):
-        string = ontleed(tabel[i][1])
+# stack_entry = final version of an entry, stack_entry will be used to draw the stack
+# table = the non-final table corresponding to the entry
+def update_entry(stack_entry, table):
+    for i in range(len(table)):
+        # Dissect the address
+        string = dissect(table[i][1])
         if string is not False:
-            part.append([string, tabel[i][0]])
-            part[0] += 1
+            stack_entry.append([string, table[i][0]])
+            stack_entry[0] += 1
     return
 
 
-def make_stapel(TT_Lijst):
-    stapel = []
-    for sub in TT_Lijst:
-        nummer = sub[0]
-        titel = sub[1]
-        user = sub[2: len(sub)]
-        par_part = [0]
-        var_part = [0]
-        res_part = [0]
-        for node in user:
+def make_stack(sf_list):
+    stack = []
+    for sf in sf_list:
+        counter = sf[0]
+        title = sf[1]
+        entry_list = sf[2: len(sf)]
+        par_entry = [0]
+        var_entry = [0]
+        res_entry = [0]
+        for entry in entry_list:
             temp = []
-            pava = node[1]
-            tabel = node[2]
-            if pava == "PAR":
-                update_part(par_part, tabel)
-            elif pava == "VAR":
-                update_part(var_part, tabel)
-            elif pava == "RES":
-                update_part(res_part, tabel)
+            data = entry[1]
+            table = entry[2]
+            if data == "PAR":
+                update_entry(par_entry, table)
+            elif data == "VAR":
+                update_entry(var_entry, table)
+            elif data == "RES":
+                update_entry(res_entry, table)
 
-        temp.append(nummer)
-        temp.append(titel)
-        temp.append(par_part)
-        temp.append(var_part)
-        temp.append(res_part)
-        stapel.append(temp)
-    return stapel
+        temp.append(counter)
+        temp.append(title)
+        temp.append(par_entry)
+        temp.append(var_entry)
+        temp.append(res_entry)
+        stack.append(temp)
+    return stack
 
 
-def burn_stapel(stapel, filename):
+def burn_stack(stack, filename):
     outfile = open('%s.txt' % filename, 'w+')
     changed = False
-    count = int
+    lowest_address = int
 
-    for functie in stapel:
-        nummer = functie[0]
-        titel = functie[1]
+    for sf in stack:
+        counter = sf[0]
+        title = sf[1]
         # User bevat PAR, VAR en RES
-        user = functie[2: len(functie)]
+        entry_list = sf[2: len(sf)]
         print("*********************************", file=outfile)
-        print("Stapel van %i. %s:" % (nummer, titel), file=outfile)
+        print("Stack of %i. %s:" % (counter, title), file=outfile)
         print("", file=outfile)
 
-        # VARIABELE EERST (START TOP STAPEL)
-        var = user[1]
+        # VARIABLES FIRST (START AT TOP OF STACK)
+        var = entry_list[1]
         if var[0] != 0:
-            # Neem de count weg
+            # Remove flag
             var = var[1: len(var)]
-            # Current bovenste punt, we zoeken het kleinste omdat top stapel = kleinste adres
+            # Current is the topmost memory cell of the stack (lowest address)
             current = var[0]
-            for punt in var:
-                if int(punt[0]) < int(current[0]):
-                    current = punt
+            for memory_cell in var:
+                if int(memory_cell[0]) < int(current[0]):
+                    current = memory_cell
             var.remove(current)
             print("|%s" % current[1], file=outfile)
 
-            # count is ons kleinste adres
-            count = int(current[0])
-            while var != []:
-                count += 1
-                current = [count, ""]
-                for punt in var:
-                    if int(punt[0]) == int(current[0]):
-                        current = punt
+            # Write output
+            lowest_address = int(current[0])
+            while not var == []:
+                lowest_address += 1
+                current = [lowest_address, ""]
+                for memory_cell in var:
+                    if int(memory_cell[0]) == int(current[0]):
+                        current = memory_cell
                         changed = True
                 if changed:
                     var.remove(current)
                     changed = False
                 print("|%s" % current[1], file=outfile)
 
-            # zorg ervoor dat we op -2(R8) terechtkome5n
-            while count < -2:
-                current = [count, ""]
-                count += 1
+            # Make sure we end at -2(R8)
+            while lowest_address < -2:
+                current = [lowest_address, ""]
+                lowest_address += 1
                 print("|%s" % current[1], file=outfile)
 
-        # Altijd
+        # Mandatory instructions
         current = [-1, "TKA"]
         print("|%s" % current[1], file=outfile)
         current = [-0, "VORIGE R8"]
         print("|%s" % current[1], file=outfile)
 
-        # Parameters onder variabele
-        par = user[0]
+        # PARAMETERS NEXT
+        # Similar to VARIABLES
+        par = entry_list[0]
         if par[0] != 0:
             par = par[1: len(par)]
             current = par[0]
-
-            for punt in par:
-                if int(punt[0]) < int(current[0]):
-                    current = punt
+            for memory_cell in par:
+                if int(memory_cell[0]) < int(current[0]):
+                    current = memory_cell
             par.remove(current)
             print("|%s" % current[1], file=outfile)
 
-            count = int(current[0])
-            while par != []:
-                count += 1
-                current = [count, ""]
-                for punt in par:
-                    if int(punt[0]) == int(current[0]):
-                        current = punt
+            lowest_address = int(current[0])
+            while not par == []:
+                lowest_address += 1
+                current = [lowest_address, ""]
+                for memory_cell in par:
+                    if int(memory_cell[0]) == int(current[0]):
+                        current = memory_cell
                         changed = True
                 if changed:
                     par.remove(current)
                     changed = False
                 print("|%s" % current[1], file=outfile)
 
-        # Resultaat als laatste
-        res = user[2]
+        # RESULTS LAST
+        # Similar to VARIABLES
+        res = entry_list[2]
         if res[0] != 0:
             res = res[1: len(res)]
-
             current = res[0]
-            for punt in res:
-                if int(punt[0]) < int(current[0]):
-                    current = punt
+            for memory_cell in res:
+                if int(memory_cell[0]) < int(current[0]):
+                    current = memory_cell
             res.remove(current)
 
-            if user[0][0] != 0:
-                count += 1
-                while count < int(current[0]):
-                    count += 1
+            if entry_list[0][0] != 0:
+                lowest_address += 1
+                while lowest_address < int(current[0]):
+                    lowest_address += 1
                     print("", file=outfile)
             print("|%s" % current[1], file=outfile)
 
-            count = int(current[0])
-            while res != []:
-                count += 1
-                current = [count, ""]
-                for punt in res:
-                    if int(punt[0]) == int(current[0]):
-                        current = punt
+            lowest_address = int(current[0])
+            while not res == []:
+                lowest_address += 1
+                current = [lowest_address, ""]
+                for memory_cell in res:
+                    if int(memory_cell[0]) == int(current[0]):
+                        current = memory_cell
                         res.remove(current)
                 print("|%s" % current[1], file=outfile)
 
@@ -345,7 +362,9 @@ def burn_stapel(stapel, filename):
     return
 
 
-def fix_stapel_layout(filename):
+# Adds layout formatting to the stack that was written to the given file
+def fix_stack_layout(filename):
+    # length contains the length of the longest cell name
     length = 0
     outfile = open('%s.txt' % filename, 'r')
     for line in outfile:
@@ -354,11 +373,11 @@ def fix_stapel_layout(filename):
                 length = len(line) - 1
 
     outfile.close()
-    burn_stapel_temp(filename, length)
+    burn_stack_temp(filename, length)
     return
 
 
-def burn_stapel_temp(filename, length):
+def burn_stack_temp(filename, length):
     outfile = open('%s.txt' % filename, 'r')
     temp = open('%s.txt' % "temp", 'w+')
     hold = False
@@ -412,6 +431,7 @@ def burn_stapel_temp(filename, length):
     return
 
 
+# Copies the temporary file to the final file
 def copy_temp(filename):
     outfile = open('%s.txt' % filename, 'w+')
     temp = open('%s.txt' % "temp", 'r')
@@ -425,78 +445,83 @@ def copy_temp(filename):
     return
 
 
+# Cleans the temporary file
 def clean_temp():
     temp = open('%s.txt' % "temp", 'w+')
     temp.close()
     return
+
 # ----------
 
+# These functions change the currently selected stack frame.
 
-# These Functions change the current function.
-def addTabel(tabel, pava):
+
+def make_new(amt):
+    table = []
+    for i in range(amt):
+        rij = ["..."] * 2
+        table.append(rij)
+    return table
+
+
+def add_table(table, pava):
     print("RIJ is niet de plaats van rij!")
     print("Als je de eerste rij wilt hebben moet je niet 0 invullen maar 1!")
     user = int(input("ADD how many new %s? " % pava))
     print()
     for i in range(user):
-        tabel.append(["...", "..."])
-    print("*Nieuwe Tabel*")
+        table.append(["...", "..."])
+    print("*Nieuwe table*")
 
 
-def deleteTabel(tabel):
+def delete_table(table):
     print("RIJ is niet de plaats van rij!")
     print("Als je de eerste rij wilt hebben moet je niet 0 invullen maar 1!")
     rij = int(input("RIJ: "))
     print()
-    tabel.pop(rij - 1)
-    print("*Nieuwe Tabel*")
+    table.pop(rij - 1)
+    print("*Nieuwe table*")
 
 
-def enterTabel(titel, tabel, pava):
+def enter_table(titel, table, pava):
     print("Element betekent de data dat je op die plaats wil invoeren.")
     print("Vul EXIT in om vroegtijdig weg te gaan uit ENTER modus.")
-    for i in range(len(tabel)):
+    for i in range(len(table)):
         for j in range(2):
-            drukCurrent(titel, tabel, pava)
+            print_current(titel, table, pava)
             print()
             if j == 0:
                 user = input("Enter Element: ")
             elif j == 1:
-                user = validInput("ENTER", tabel, i, j)
+                user = validInput("ENTER", table, i, j)
 
             if user != "EXIT":
-                tabel[i][j] = user
+                table[i][j] = user
             else:
                 break
         if user == "EXIT":
             break
-    print("*Nieuwe Tabel*")
+    print("*Nieuwe table*")
 
 
-def makeNew(amt):
-    tabel = []
-    for i in range(amt):
-        rij = ["..."] * 2
-        tabel.append(rij)
-    return tabel
-
-
-def modifyTabel(tabel):
+def modify_table(table):
     print("RIJ en KOLOM zijn niet de plaats van de rij en kolom!")
     print("Als je de eerste rij wilt hebben moet je niet 0 invullen maar 1!")
     rij = int(input("RIJ: "))
     kolom = int(input("KOLOM: "))
     if kolom - 1 == 1:
-        user = validInput("MODIFY", tabel, rij, kolom)
-        tabel[rij - 1][kolom - 1] = user
+        user = validInput("MODIFY", table, rij, kolom)
+        table[rij - 1][kolom - 1] = user
     else:
         user = input("NEW VALUE: ")
-        tabel[rij - 1][kolom - 1] = user
+        table[rij - 1][kolom - 1] = user
     return
+
 # ----------
 
 
-# These Functions check if the input is valid or sort the ToekeningsTabellen of the current session>
+# These Functions check if the input is valid or sort the Toekeningstabelen of the current session>
+
 # The Difference between checkInput and validInput is that ValidInput only works if called upon to modify
 # a specific element in a Function.
 def checkInput(tocheck, value):
@@ -528,7 +553,7 @@ def checkInput(tocheck, value):
         return amt
 
 
-def validInput(tocheck, tabel, rij, kolom):
+def validInput(tocheck, table, rij, kolom):
     valid = bool
     if tocheck == "MODIFY" or tocheck == "ENTER":
         if tocheck == "MODIFY":
@@ -554,8 +579,9 @@ def validInput(tocheck, tabel, rij, kolom):
                 usertest = user.split("(")
                 test = usertest[0]
                 try:
-                    int(test)
+                    test = int(test)
                 except ValueError:
+
                     valid = False
 
                 if valid:
@@ -591,117 +617,108 @@ def validInput(tocheck, tabel, rij, kolom):
                     valid = False
 
             if valid is not True and tocheck == "MODIFY":
-                print("The input should be a valid DRAMA adress!")
-                user = validInput("MODIFY", tabel, rij, kolom)
+                print("The input should be a valid DRAMA addresss!")
+                user = validInput("MODIFY", table, rij, kolom)
             elif valid is not True and tocheck == "ENTER":
-                print("The input should be a valid DRAMA adress!")
-                user = validInput("ENTER", tabel, rij, kolom)
+                print("The input should be a valid DRAMA addresss!")
+                user = validInput("ENTER", table, rij, kolom)
     return user
 
 
-def create_node(titel, pava, tabel):
-    node = []
-    node.append(titel)
-    node.append(pava)
-    node.append(tabel)
-    return node
+def create_entry(titel, pava, table):
+    entry = []
+    entry.append(titel)
+    entry.append(pava)
+    entry.append(table)
+    return entry
 
 
-def create_sub(nummer, titel, tabel, pava):
-    sub = []
-    sub.append(nummer)
-    sub.append(titel)
-    sub.append(create_node(titel, pava, tabel))
-    return sub
+def create_sf(nummer, titel, table, pava):
+    sf = []
+    sf.append(nummer)
+    sf.append(titel)
+    sf.append(create_entry(titel, pava, table))
+    return sf
 
 
-def check_sub(sub):
-    user = sub[2: len(sub)]
-    new_node = user[-1]
-    new_node_pava = new_node[1]
-    for node_count in range(len(user) - 1):
-        node = user[node_count]
-        node_pava = node[1]
-        if node_pava == new_node_pava:
-            sub.pop(node_count + 2)
+def check_sf(sf):
+    temp = sf[2: len(sf)]
+    # Get the entry that was just inserted
+    new_entry = temp[-1]
+    new_entry_pava = new_entry[1]
+    # Check if this entry already exists
+    for entry_count in range(len(temp) - 1):
+        entry = temp[entry_count]
+        entry_pava = entry[1]
+        if entry_pava == new_entry_pava:
+            # +2 because counter and title are in the front.
+            sf.pop(entry_count + 2)
             return
     return
 
 
-def check_after_delete(TT_Lijst, sub):
-    if len(sub) == 2:
-        # Delete sub
-        TT_Lijst.remove(sub)
+def check_after_delete(sf_list, sf):
+    if len(sf) == 2:
+        # Delete sf
+        sf_list.remove(sf)
 
         nummer_expect = 1
-        for sub in TT_Lijst:
-            if sub[0] != nummer_expect:
-                sub[0] = nummer_expect
+        for sf in sf_list:
+            if sf[0] != nummer_expect:
+                sf[0] = nummer_expect
             nummer_expect += 1
     return
 
 
-def sort_sub(sub):
-    user = sub[2: len(sub)]
-    user_count = 0
-    test = ["PAR", "VAR", "RES"]
-    test_count = 0
-    node_count = 0
-    found = False
-    wait = True
+def get_value(pava):
+    if pava == "PAR":
+        return 0
+    elif pava == "VAR":
+        return 1
+    else:
+        return 2
 
-    while wait:
-        temp_node = user[user_count]
-        pava = temp_node[1]
-        pava_test = test[test_count]
-        if pava == pava_test:
-            user_count += 1
-            test_count += 1
-        else:
-            for node_count in range(len(user)):
-                temp_node = user[node_count]
-                pava = temp_node[1]
 
-                if pava == pava_test:
-                    found = True
-                    break
+def sort_sf(sf):
+    # Sorting max of 3 elements,
+    # Only 1 element
+    if len(sf) <= 3:
+        return
 
-            if found:
-                temp = sub.pop(node_count + 2)
-                sub.insert(user_count + 2, temp)
-                user.pop(node_count)
-                user.insert(user_count, temp)
-                found = False
-            else:
-                test_count += 1
-
-        if test_count == 3 or user_count == len(user):
-            wait = False
+    for i in range(2, len(sf)):
+        # only consider values in unsorted part of the sf
+        for j in range(i, len(sf)):
+            # sf[i][2] should be lowest value in sf
+            if get_value(sf[i][1]) > get_value(sf[j][1]):
+                temp = sf[i]
+                sf[i] = sf[j]
+                sf[j] = temp
     return
 
 
-def sort_lijst_invoeg(TT_Lijst, titel, pava, tabel):
-    sub_nummer = 0
+def sort_lijst_invoeg(sf_list, titel, pava, table):
+    sf_nummer = 0
     check = True
 
-    for sub in TT_Lijst:
-        sub_nummer = sub[0]
-        sub_titel = sub[1]
-        if sub_titel == titel:
+    for sf in sf_list:
+        sf_nummer = sf[0]
+        sf_titel = sf[1]
+        if sf_titel == titel:
             check = False
-            sub.append(create_node(titel, pava, tabel))
-            check_sub(sub)
-            sort_sub(sub)
+            sf.append(create_entry(titel, pava, table))
+            check_sf(sf)
+            sort_sf(sf)
             break
     if check:
-        new_sub = create_sub(sub_nummer + 1, titel, tabel, pava)
-        TT_Lijst.append(new_sub)
+        new_sf = create_sf(sf_nummer + 1, titel, table, pava)
+        sf_list.append(new_sf)
     return
+
 # ----------
 
 
 # This Function handles the interface.
-def Interface(titel, pava, tabel, TT_Lijst):
+def interface(titel, pava, table, sf_list):
     user = "START"
     while user != "EXIT":
         print()
@@ -720,85 +737,83 @@ def Interface(titel, pava, tabel, TT_Lijst):
             print("5: DRUK")
             print("6: ENTER")
             print("7: EXIT")
-            print("8: FROMFILE => !WIP!")
-            print("9: GET")
-            print("10: GRAPHICS or G")
-            print("11: HELP")
-            print("12: LIJST")
-            print("13: MODIFY")
-            print("14: NEW")
-            print("15: REMOVE")
-            print("16: SAVE or S")
-            print("17: STAPEL or ST")
-            print("18: STANDARD or STD")
+            print("8: GET")
+            print("9: GRAPHICS or G")
+            print("10: HELP")
+            print("11: LIJST")
+            print("12: MODIFY")
+            print("13: NEW")
+            print("14: REMOVE")
+            print("15: SAVE or S")
+            print("16: STAPEL or ST")
+            print("17: STANDARD or STD")
             print("TYPE DETAILS FOR DETAILS ON ALL COMMANDS")
             input("Press Enter to exit HELP!")
             print()
 
         elif user == "DETAILS":
             print("* DETAILS: *")
-            print("FUNCTION = the function of which you are currently making a toekeningstabel")
+            print("FUNCTION = the function of which you are currently making a toekeningstable")
             print("SESSION = all of the functions made during a single 'session'")
             print()
             print("These Instructions modify the current function:")
             print("1: ADD = ADD a specied amount of extra rows to the current function.")
             print("3: DELETE = DELETE a specified row.")
             print("6: ENTER = ENTER the function, this will always enter the function at the very first element.")
-            print("13: MODIFY =  MODIFY a specified element in the function.")
+            print("12: MODIFY =  MODIFY a specified element in the function.")
             input("Press Enter to continue")
             print()
             print("These Instructions generate a new or old function:")
-            print("9: GET = GET an old function.")
-            print("14: NEW = Create a NEW function.")
-            print("15: REMOVE = REMOVE an old function")
+            print("8: GET = GET an old function.")
+            print("13: NEW = Create a NEW function.")
+            print("14: REMOVE = REMOVE an old function")
             input("Press Enter to continue")
             print()
             print("These Instructions visualize or save the current function:")
             print("5: DRUK = DRUK the current function.")
-            print("16: SAVE =  SAVE the current function")
+            print("15: SAVE =  SAVE the current function")
             input("Press Enter to continue")
             print()
             print("These Instructions generate a standard or old session:")
-            print("8: FROMFILE = CURRENTLY NOT IMPLEMENTED")
-            print("18: STANDARD or STD = load the STANDARD preset session ")
+            print("17: STANDARD or STD = load the STANDARD preset session ")
             input("Press Enter to continue")
             print()
             print("These Instructions visualize or save the current session")
             print("2: BURN = BURN all the functions you have saved in the current session to a specified", end=" ")
             print(".txt file, if there is no file with that name, the program will create one.")
             print("2: The program saves this .txt file in the same folder as where the program is located.")
-            print("10: GRAPHICS = will GRAPHICally generate the current session with the graphics.py module.")
-            print("12: LIJST = Will LIJST all the functions you have saved in the current session in the terminal.")
+            print("9: GRAPHICS = will GRAPHICally generate the current session with the graphics.py module.")
+            print("11: LIJST = Will LIJST all the functions you have saved in the current session in the terminal.")
             input("Press Enter to continue")
             print()
             print("These Instructions will perform global actions.")
             print("4: DETAILS = I think you know what this does ;-)")
             print("5: EXIT = EXIT the program.")
-            print("11: HELP = will display a list of all the currently implemented commands to HELP you")
-            print("15: STAPEL =  will generate the STAPEL in a specified .txt file. (see BURN)")
+            print("10: HELP = will display a list of all the currently implemented commands to HELP you")
+            print("14: STAPEL =  will generate the STAPEL in a specified .txt file. (see BURN)")
             input("Press Enter to exit DETAILS!")
             print()
 
         elif user == "ADD":
-            print("*Dit is de oude tabel*")
-            drukCurrent(titel, tabel, pava)
-            addTabel(tabel, pava)
-            drukCurrent(titel, tabel, pava)
+            print("*Dit is de oude table*")
+            print_current(titel, table, pava)
+            add_table(table, pava)
+            print_current(titel, table, pava)
 
         elif user == "DELETE":
-            print("*Dit is de oude tabel*")
-            drukCurrent(titel, tabel, pava)
-            deleteTabel(tabel)
-            drukCurrent(titel, tabel, pava)
+            print("*Dit is de oude table*")
+            print_current(titel, table, pava)
+            delete_table(table)
+            print_current(titel, table, pava)
 
         elif user == "DRUK":
-            print("Dit is de Current geselecteerde tabel:")
-            drukCurrent(titel, tabel, pava)
+            print("Dit is de Current geselecteerde table:")
+            print_current(titel, table, pava)
 
         elif user == "ENTER":
-            print("Enter de elementen van de tabel, startend met linksboven:")
-            enterTabel(titel, tabel, pava)
-            drukCurrent(titel, tabel, pava)
+            print("Enter de elementen van de table, startend met linksboven:")
+            enter_table(titel, table, pava)
+            print_current(titel, table, pava)
 
         elif user == "GET":
             print("Roep een oude gesavede functie op:")
@@ -806,30 +821,30 @@ def Interface(titel, pava, tabel, TT_Lijst):
             pava = checkInput("PAVA", "NULL")
 
             found = False
-            for sub in TT_Lijst:
-                if sub[1] == titel:
-                    temp = sub[2: len(sub)]
-                    for node in temp:
-                        if node[1] == pava:
+            for sf in sf_list:
+                if sf[1] == titel:
+                    temp = sf[2: len(sf)]
+                    for entry in temp:
+                        if entry[1] == pava:
                             found = True
-                            tabel = node[2]
-                            print("Current Tabel is nu:")
-                            drukCurrent(titel, tabel, pava)
+                            table = entry[2]
+                            print("Current table is nu:")
+                            print_current(titel, table, pava)
                             break
                     break
 
             if found is False:
-                print("That T-Tabel doesn't exist!")
-                print("Creating new T-Tabel with name %s-%s." % (pava, titel))
+                print("That T-table doesn't exist!")
+                print("Creating new T-table with name %s-%s." % (pava, titel))
                 amt = checkInput("AMOUNT", pava)
-                tabel = makeNew(amt)
+                table = make_new(amt)
 
         elif user == "MODIFY":
-            print("*Old T-Tabel*")
-            drukCurrent(titel, tabel, pava)
-            modifyTabel(tabel)
-            print("*New T-Tabel*")
-            drukCurrent(titel, tabel, pava)
+            print("*Old T-table*")
+            print_current(titel, table, pava)
+            modify_table(table)
+            print("*New T-table*")
+            print_current(titel, table, pava)
 
         elif user == "NEW":
             print("Make a new Function: ")
@@ -837,22 +852,22 @@ def Interface(titel, pava, tabel, TT_Lijst):
             titel = input("Enter Function name: ")
             pava = checkInput("PAVA", "NULL")
             amt = checkInput("AMOUNT", pava)
-            tabel = makeNew(amt)
+            table = make_new(amt)
 
         elif user == "SAVE" or user == "S":
-            sort_lijst_invoeg(TT_Lijst, titel, pava, tabel)
+            sort_lijst_invoeg(sf_list, titel, pava, table)
 
         elif user == "LIJST":
-            print("*These are all the current T-Tabellen*")
+            print("*These are all the current T-tablelen*")
             print()
-            drukAll(TT_Lijst)
+            print_all(sf_list)
 
         elif user == "GRAPHICS" or user == "G":
-            TT_Lijst_graphics(TT_Lijst)
+            sf_list_graphics(sf_list)
 
         elif user == "BURN":
             filename = input("Enter filename: ")
-            saveFile(filename, TT_Lijst)
+            save_to_file(filename, sf_list)
 
         elif user == "REMOVE":
             print("Delete an old function: ")
@@ -860,38 +875,39 @@ def Interface(titel, pava, tabel, TT_Lijst):
             pava = checkInput("PAVA", "NULL")
 
             found = False
-            for sub in TT_Lijst:
-                if sub[1] == titel:
-                    temp = sub[2: len(sub)]
-                    for node_count in range(len(temp)):
-                        node = temp[node_count]
-                        if node[1] == pava:
+            for sf in sf_list:
+                if sf[1] == titel:
+                    temp = sf[2: len(sf)]
+                    for entry_count in range(len(temp)):
+                        entry = temp[entry_count]
+                        if entry[1] == pava:
                             found = True
-                            sub.pop(node_count + 2)
-                            check_after_delete(TT_Lijst, sub)
-                            print("T-Tabel with name %s-%s removed." % (pava, titel))
+                            sf.pop(entry_count + 2)
+                            check_after_delete(sf_list, sf)
+                            print("T-table with name %s-%s removed." % (pava, titel))
                             break
                     break
             if found is False:
-                print("That T-Tabel doesn't exist!")
+                print("That T-table doesn't exist!")
 
         elif user == "STAPEL" or user == "ST":
             filename = input("Enter filename: ")
             print("Current Stapel written to %s.txt!" % filename)
-            stapel = make_stapel(TT_Lijst)
-            burn_stapel(stapel, filename)
-            fix_stapel_layout(filename)
+            stapel = make_stack(sf_list)
+            burn_stack(stapel, filename)
+            fix_stack_layout(filename)
 
         elif user == "STANDARD" or user == "STD":
-            TT_Lijst = standaard()
+            sf_list = gen_std()
 
     return
+
 # ----------
 
 
 #  The "main" function.
 def main():
-    TT_Lijst = []
+    sf_list = []
     print("*********************************")
     print("Welcome to DRAMA Stapel Tekenaar!")
     print("*********************************")
@@ -900,7 +916,7 @@ def main():
     user = input("Press enter to start or type MANUAL to download the manual! ")
     user = user.upper()
     while user == "MANUAL":
-        print("The MANUAL has been written to the file <DRAMA T-Tabellen MANUAL.txt>")
+        print("The MANUAL has been written to the file <DRAMA T-tablelen MANUAL.txt>")
         manual()
         print()
         user = input("Press enter to start or type MANUAL to download the manual! ")
@@ -908,20 +924,21 @@ def main():
 
     if user == "STD":
         print("LOADING WITH STANDAARD SETTINGS")
-        titel = "TESTERINO"
-        pava = "PAR"
+        title = "TESTERINO"
+        data = "PAR"
         amt = 1
-        tabel = makeNew(amt)
-        TT_Lijst = standaard()
-        Interface(titel, pava, tabel, TT_Lijst)
+        table = make_new(amt)
+        sf_list = gen_std()
+        interface(title, data, table, sf_list)
 
     else:
         print()
-        titel = input("Enter Function name: ")
-        pava = checkInput("PAVA", "NULL")
-        amt = checkInput("AMOUNT", pava)
-        tabel = makeNew(amt)
-        Interface(titel, pava, tabel, TT_Lijst)
+        title = input("Enter Function name: ")
+        data = checkInput("PAVA", "NULL")
+        amt = checkInput("AMOUNT", type)
+        table = make_new(amt)
+        interface(title, data, table, sf_list)
+
 # ----------
 
 
