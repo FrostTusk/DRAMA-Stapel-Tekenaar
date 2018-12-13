@@ -1,4 +1,4 @@
-from graphics import GraphicsWindow
+#from graphics import GraphicsWindow
 
 # I apologize for the lack of documentation, I was still a foolish, novice programmer when I wrote this code.
 
@@ -948,7 +948,7 @@ def main():
         print()
         title = input("Enter Function name: ")
         data = check_input("DATA", "NULL")
-        amt = check_input("AMOUNT", type)
+        amt = check_input("AMOUNT", data)
         table = make_new(amt)
         interface(title, data, table, sf_list)
 
